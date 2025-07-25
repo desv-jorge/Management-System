@@ -1,0 +1,35 @@
+# Evita subir a pasta do ambiente virtual
+venv/
+ENV/
+env/
+
+# Evita subir configurações do VSCode ou IDE
+.vscode/
+.idea/
+
+# Arquivos Python compilados
+__pycache__/
+*.pyc
+*.pyo
+
+# Arquivos de log
+*.log
+
+# Arquivos sensíveis e configurações
+.env
+.env.*
+
+# Banco de dados local (caso use SQLite em testes)
+*.sqlite3
+
+# Cache de pacotes
+pip-wheel-metadata/
+*.egg-info/
+dist/
+build/
+
+# Testes e relatórios temporários
+.coverage
+htmlcov/
+.tox/
+pytest_cache/
