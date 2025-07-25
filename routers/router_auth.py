@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException, status
-from providers.hash_provider import verify_hash
+from providers.hash_provider import verify_hash, gen_hash
+from providers.token_provider import create_access_token, verify_acess_token
 import json
 
 from models.auth import Model_login
@@ -28,5 +29,7 @@ async def login(data_login : Model_login):
         print("senha inválida")
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail= "senha incorreta")
     
-    return {"sucess": "ok"}
+    token = create_access_token({"sub": data_login.email})
+    
+    return {"user": data_login, "acess_token": token}
     
