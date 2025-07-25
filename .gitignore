@@ -33,3 +33,6 @@ build/
 htmlcov/
 .tox/
 pytest_cache/
+
+# minhas anotações
+anotations.txt
