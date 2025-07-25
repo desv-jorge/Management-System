@@ -2,7 +2,7 @@ from database.connection import create_client
 
 client = create_client()
 
-async def register_user(name, level_acess, email, created_at):
+async def register_user(name, level_acess, email ,password , created_at):
     try:
         database = client["Database"]
         collection = database["users"]
@@ -11,6 +11,7 @@ async def register_user(name, level_acess, email, created_at):
         "nome" : name,
         "acess_level" : level_acess,
         "email": email,
+        "password": password,
         "created_at": created_at }
     
 
