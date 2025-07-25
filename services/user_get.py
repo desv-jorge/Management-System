@@ -1,5 +1,5 @@
 from models.user import Model_user
-from mongo.connection import create_client
+from database.connection import create_client
 
 async def get_user(email):
     client = create_client()

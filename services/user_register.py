@@ -1,4 +1,4 @@
-from mongo.connection import create_client
+from database.connection import create_client
 
 client = create_client()
 
