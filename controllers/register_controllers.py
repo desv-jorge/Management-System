@@ -7,8 +7,8 @@ from services.user_email_get import get_email
 
 from providers.hash_provider import gen_hash
 
-async def processor_register_user(user : Model_user, logged_user: Model_user):
-    if logged_user.level_acess != "admin":
+async def processor_register_user(user : Model_user, logged_user ):
+    if (logged_user["acess_level"] != "admin"):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail= "Permissão necessária")
 
     isEmail = await get_email(user.email)

@@ -3,7 +3,6 @@ from fastapi import Depends, HTTPException, status
 from jose import JWTError
 
 from providers.token_provider import verify_acess_token
-from providers import token_provider
 from services.user_get_ByEmail import get_user
 
 oauth2_schema = OAuth2PasswordBearer(tokenUrl="token")

@@ -7,7 +7,7 @@ class Model_simple_user(BaseModel):
 
 class Model_user(BaseModel):
     name: str
-    level_acess: str
+    acess_level: str
     email: str
     password: str
 

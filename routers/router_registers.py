@@ -10,4 +10,4 @@ router = APIRouter()
 
 @router.post("/user")
 async def register_user(user: Model_user = Depends(get_user_loggedIn), user_body: Model_user = Body()):
-    return await processor_register_user(user_body)
+    return await processor_register_user(user_body, user)
