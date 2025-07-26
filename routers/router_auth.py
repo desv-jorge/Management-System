@@ -1,13 +1,15 @@
-from fastapi import APIRouter, HTTPException, status
-from providers.hash_provider import verify_hash, gen_hash
-from providers.token_provider import create_access_token, verify_acess_token
-import json
+from fastapi import APIRouter, HTTPException, status, Depends
+
+from .auth_utils import get_user_loggedIn
+
+from providers.hash_provider import verify_hash
+from providers.token_provider import create_access_token
 
 from models.auth import Model_login
-from models.user import Model_user
+from models.user import Model_user, Model_simple_user
 
 from services.user_email_get import get_email
-from services.user_hash_get import get_hash
+from services.user_get_hash_ByEmail import get_hash
 
 router = APIRouter()
 
@@ -34,6 +36,6 @@ async def login(data_login : Model_login):
     return {"user": data_login, "acess_token": token}
 
 @router.get("/me")
-def me(token: str):
-    return 
+def me(usuario: Model_user = Depends(get_user_loggedIn)):
+    return usuario
     

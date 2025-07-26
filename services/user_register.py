@@ -17,7 +17,6 @@ async def register_user(name, level_acess, email ,password , created_at):
 
         result = collection.insert_one(document)
 
-        print(result.acknowledged)
         client.close()
 
         return {"success": "ok"} if result.acknowledged else {"error": "failed"}
