@@ -1,11 +1,13 @@
-from models.user import Model_user_one
+from models.user import Model_user, Model_user_one
 
 from services.user_delete import delete_user
 
 from fastapi import HTTPException, status
 
 
-async def user_delete(email: Model_user_one):
+async def user_delete(email: Model_user_one, logged_user: Model_user):
+    if logged_user != "admin":
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail= "Permissão necessária")
 
     delete_response = await delete_user(email)
 
