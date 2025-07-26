@@ -19,4 +19,5 @@ async def processor_register_user(user : Model_user, logged_user ):
     
     password = str(user.password)
     password_hashed = gen_hash(password)
-    return await register_user(user.name, user.level_acess, user.email, password_hashed)
+
+    return await register_user(user.nome, user.acess_level, user.email, password_hashed)
