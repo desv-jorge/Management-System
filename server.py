@@ -5,6 +5,7 @@ from routers import router_registers
 from routers import router_auth
 from routers import router_deletes
 from routers import router_emails
+from routers import router_modifications
 
 app = FastAPI()
 
@@ -20,3 +21,4 @@ app.include_router(router_registers.router, prefix="/register")
 app.include_router(router_auth.router, prefix="/auth")
 app.include_router(router_deletes.router, prefix="/delete")
 app.include_router(router_emails.router, prefix="/email")
+app.include_router(router_modifications.router, prefix="/modify")
