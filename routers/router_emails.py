@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Body
+from fastapi import APIRouter
 
 from providers.email_provider import confirm_email
 
