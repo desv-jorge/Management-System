@@ -11,3 +11,7 @@ router = APIRouter()
 @router.post("/user")
 async def register_user(user: Model_user = Depends(get_user_loggedIn)):
     return await processor_register_user(user)
+
+@router.delete("/user")
+async def delete_user(user: Model_user = Depends(get_user_loggedIn)):
+    pass

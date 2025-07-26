@@ -21,7 +21,7 @@ async def register_user(name, level_acess, email ,password):
 
         client.close()
 
-        return {"success": "ok"} if result.acknowledged else {"error": "failed"}
+        return {"message": "usuário registrado"} if result.acknowledged else {"error": "failed"}
 
     except Exception as e:
         raise Exception(
