@@ -15,7 +15,7 @@ async def register_user(name, level_acess, email ,password):
         "email": email,
         "password": password,
         "created_at": now.strftime("%d-%m-%Y %H:%M:%S"),
-        "status": "inactive" 
+        "is_active": False 
         }
     
 

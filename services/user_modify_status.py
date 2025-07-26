@@ -11,7 +11,7 @@ async def edit_status(email: str):
         collection = database["users"]
 
         query_filter = {'email' : email}
-        update_operation = { '$set' : { 'status' : 'active' }}
+        update_operation = { '$set' : { 'is_active' : True }}
 
         results = collection.update_one(query_filter, update_operation)
         print(f"\nresults: {results}")
