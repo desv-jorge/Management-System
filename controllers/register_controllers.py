@@ -8,10 +8,8 @@ from services.user_email_get import get_email
 from providers.hash_provider import gen_hash
 
 async def processor_register_user(user : Model_user):
-    print(f"\n argumento: {user}")
 
     isEmail = await get_email(user.email)
-    print(f"\n {isEmail}")
 
     if(isEmail):
         print("existe")

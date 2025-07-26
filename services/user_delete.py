@@ -9,11 +9,7 @@ async def delete_user(email):
     db = client["Database"]
     collection = db["users"]
 
-    print(f"\n {email.email}")
-
     user : Model_user = await get_user(email.email)
-
-    print(f"\n {user}")
     
     if(not user):
         return False
