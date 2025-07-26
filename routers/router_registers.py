@@ -1,22 +1,13 @@
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, Depends
 
 from models.user import Model_user
 
-from services.user_register import register_user
-from services.user_email_get import get_email
+from controllers.register_controllers import processor_register_user
 
-from providers.hash_provider import gen_hash
+from .auth_utils import get_user_loggedIn
 
 router = APIRouter()
 
 @router.post("/user")
-async def register_client(user: Model_user):
-    isEmail = await get_email(user.email)
-
-    if(isEmail):
-        print("existe")
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail= "Email em uso")
-    
-    password = str(user.password)
-    password_hashed = gen_hash(password)
-    return await register_user(user.name, user.level_acess, user.email, password_hashed ,user.created_at)
+async def register_user(user: Model_user = Depends(get_user_loggedIn)):
+    return await processor_register_user(user)

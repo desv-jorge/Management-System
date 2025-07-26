@@ -1,8 +1,10 @@
 from database.connection import create_client
+from datetime import datetime
 
 client = create_client()
 
-async def register_user(name, level_acess, email ,password , created_at):
+async def register_user(name, level_acess, email ,password):
+    now = datetime.now()
     try:
         database = client["Database"]
         collection = database["users"]
@@ -12,7 +14,7 @@ async def register_user(name, level_acess, email ,password , created_at):
         "acess_level" : level_acess,
         "email": email,
         "password": password,
-        "created_at": created_at }
+        "created_at": now.strftime("%d-%m-%Y %H:%M:%S") }
     
 
         result = collection.insert_one(document)
