@@ -8,6 +8,7 @@ async def get_hash(email):
     collection = db["users"]
 
     results : Model_user = collection.find_one({"email": email})
+    
     if(not results):
         return False
     
@@ -15,5 +16,5 @@ async def get_hash(email):
 
     client.close()
         
-    return results
+    return results["password"]
 

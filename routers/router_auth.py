@@ -20,10 +20,10 @@ async def login(data_login : Model_login):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail= "Email não possui cadastro")
     
     hash_password_bd : Model_user = await get_hash(data_login.email)
-    hash_bd = hash_password_bd["password"]
-    print(hash)
+    
+    print(hash_password_bd)
 
-    password_isValid = verify_hash(data_login.password, hash_bd)
+    password_isValid = verify_hash(data_login.password, hash_password_bd)
 
     if (not password_isValid):
         print("senha inválida")
@@ -32,4 +32,8 @@ async def login(data_login : Model_login):
     token = create_access_token({"sub": data_login.email})
     
     return {"user": data_login, "acess_token": token}
+
+@router.get("/me")
+def me(token: str):
+    return 
     
