@@ -3,23 +3,23 @@ from datetime import datetime
 
 client = create_client()
 
-async def register_user(name, level_acess, email ,password):
+async def register_user(nome, acess_level, email ,password):
     now = datetime.now()
     try:
         database = client["Database"]
         collection = database["users"]
 
         document = { 
-        "nome" : name,
-        "acess_level" : level_acess,
+        "nome" : nome,
+        "acess_level" : acess_level,
         "email": email,
         "password": password,
         "created_at": now.strftime("%d-%m-%Y %H:%M:%S"),
         "is_active": False 
         }
     
-
         result = collection.insert_one(document)
+        print(result)
 
         client.close()
 

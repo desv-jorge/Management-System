@@ -16,9 +16,9 @@ async def processor_login(data_login : Model_login):
     if(not isEmail):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail= "Email não possui cadastro")
     
-    user = get_user(data_login.email)
+    user = await get_user(data_login.email)
 
-    if(user["status"] != "active"):
+    if(user["is_active"] != True):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail= "Email precisa ser autenticado")
     
     hash_password_bd : Model_user = await get_hash(data_login.email)
