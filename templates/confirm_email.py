@@ -3,6 +3,7 @@ from datetime import datetime
 def create_template(nome, codigo):
     now = datetime.now()
     date = now.strftime("%d-%m-%Y")
+    hour = now.strftime("%H:%M:%S")
 
     conteudo_html = f"""
     <!DOCTYPE html>
@@ -12,6 +13,7 @@ def create_template(nome, codigo):
         <h2 style="color: #0d6efd;">Olá, {nome}!</h2>
         <p>Para finalizar seu cadastro na plataforma utilize o código de verificação</p>
         <p><strong>Data:</strong> {date}</p>
+        <p><strong>Hora:</strong> {hour}</p>
         <p style="margin-top: 20px;">{codigo}</p>
         <p style="margin-top: 40px; font-size: 12px; color: #666;">Este é um e-mail automático. Por favor, não responda.</p>
         </div>

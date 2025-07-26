@@ -14,7 +14,9 @@ async def register_user(name, level_acess, email ,password):
         "acess_level" : level_acess,
         "email": email,
         "password": password,
-        "created_at": now.strftime("%d-%m-%Y %H:%M:%S") }
+        "created_at": now.strftime("%d-%m-%Y %H:%M:%S"),
+        "status": "inactive" 
+        }
     
 
         result = collection.insert_one(document)
