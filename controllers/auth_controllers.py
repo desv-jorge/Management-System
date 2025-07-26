@@ -8,12 +8,18 @@ from models.user import Model_user
 
 from services.user_email_get import get_email
 from services.user_get_hash_ByEmail import get_hash
+from services.user_get_ByEmail import get_user
 
 async def processor_login(data_login : Model_login):
     isEmail = await get_email(data_login.email)
 
     if(not isEmail):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail= "Email não possui cadastro")
+    
+    user = get_user(data_login.email)
+
+    if(user["status"] != "active"):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail= "Email precisa ser autenticado")
     
     hash_password_bd : Model_user = await get_hash(data_login.email)
 
