@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Body
 
 from models.user import Model_user
 
@@ -9,9 +9,5 @@ from .auth_utils import get_user_loggedIn
 router = APIRouter()
 
 @router.post("/user")
-async def register_user(user: Model_user = Depends(get_user_loggedIn)):
-    return await processor_register_user(user)
-
-@router.delete("/user")
-async def delete_user(user: Model_user = Depends(get_user_loggedIn)):
-    pass
+async def register_user(user: Model_user = Depends(get_user_loggedIn), user_body: Model_user = Body()):
+    return await processor_register_user(user_body)
