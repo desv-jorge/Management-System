@@ -91,9 +91,9 @@ pip install -r requirements.txt
 ### 4. Crie o arquivo `.env`
 
 ```env
-MONGO_URI = "mongodb+srv://jorge:22916145@database.17vomu2.mongodb.net/?retryWrites=true&w=majority&appName=Database"
+MONGO_URI = "string de conexão"
 
-SECRET_KEY = "7721d43bbd163a81e3ad6c5f6a734d717137f35e1e544b9ad5e9a1016a85fbed"
+SECRET_KEY = "hash gerado por um bash"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 14400
 ```
