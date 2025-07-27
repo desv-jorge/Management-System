@@ -21,10 +21,24 @@ API desenvolvida com [FastAPI](https://fastapi.tiangolo.com/) para gerenciamento
 backend/
 │
 ├── controllers/               # Funções de controle de negócio
+│   ├── auth_controllers.py
+│   ├── delete_controllers.py
+│   ├── modify_controllers.py
+│   ├── register_controllers.py
 ├── database/                  # Conexão com MongoDB
-├── models/                    # Modelos Pydantic (validação e schema)
+│   ├── connection.py
+├── models/                    # Modelos Pydantic
+│   ├── auth.py
+│   ├── client.py
+│   ├── email.py
+│   ├── user.py
 ├── providers/                 # Funções auxiliares ou externas
+│   ├── email_provider.py
+│   ├── hash_provider.py
+│   ├── token_provider.py
 ├── routers/                   # Rotas organizadas por responsabilidade
+│   ├── __init__.py
+│   ├── auth_utils.py
 │   ├── router_auth.py
 │   ├── router_deletes.py
 │   ├── router_emails.py
@@ -32,9 +46,18 @@ backend/
 │   └── router_registers.py
 │
 ├── services/                  # Lógica de serviço (ex: banco de dados)
+│   ├── client_delete.py
+│   ├── client_register.py
+│   ├── user_delete.py
+│   ├── user_email_get.py
+│   ├── user_get_hash_ByEmail.py
+│   ├── user_modify_status.py
+│   ├── user_register.py
 ├── templates/                 # Templates de e-mail ou HTML (se houver)
-├── server.py                  # Ponto de entrada da aplicação
-└── .env                       # Variáveis de ambiente
+│   ├── confirm_email.py
+├── .gitignore 
+├── README.md 
+└──  server.py                  # Ponto de entrada da aplicação
 ```
 
 ---
