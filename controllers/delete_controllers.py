@@ -1,6 +1,7 @@
 from models.user import Model_user, Model_user_one
 
 from services.user_delete import delete_user
+from services.client_delete import delete_client
 
 from fastapi import HTTPException, status
 
@@ -16,3 +17,13 @@ async def user_delete(email: Model_user_one, user: Model_user):
         raise HTTPException(status_code=status.HTTP_200_OK, detail="Usuário deletado com sucesso")
 
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuário não encontrado")
+
+
+async def client_delete(id):
+
+    delete_response = await delete_client(id)
+
+    if(delete_response):
+        raise HTTPException(status_code=status.HTTP_200_OK, detail="client deletado com sucesso")
+
+    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="client não encontrado")
