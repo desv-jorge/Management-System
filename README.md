@@ -1,108 +1,80 @@
-## 📦 Backend - Manager de uma loja de Celulares
+# 📦 Backend - Management System (Loja de Celulares)
 
-API desenvolvida com [FastAPI](https://fastapi.tiangolo.com/) para gerenciamento de usuários, autenticação, carrinhos, modificações e operações relacionadas a um sistema de controle de celulares.
+API desenvolvida com [FastAPI](https://fastapi.tiangolo.com/) para gerenciamento de usuários, autenticação, envio de e-mails e operações administrativas relacionadas a uma loja de celulares.
 
 ---
 
-### 🚀 Tecnologias utilizadas
+## 🚀 Tecnologias utilizadas
 
 * **Python 3.11+**
 * **FastAPI**
-* **PyMongo** (MongoDB)
+* **MongoDB** (via PyMongo)
 * **Pydantic**
 * **Uvicorn** (servidor ASGI)
+* **JWT** (para autenticação)
 * **CORS Middleware**
 
 ---
 
-### 📁 Estrutura de Pastas
+## 📁 Estrutura de Pastas
 
 ```
 backend/
 │
 ├── controllers/               # Funções de controle de negócio
-│   ├── auth_controllers.py
-│   ├── delete_controllers.py
-│   ├── modify_controllers.py
-│   ├── register_controllers.py
 ├── database/                  # Conexão com MongoDB
-│   ├── connection.py
-├── models/                    # Modelos Pydantic
-│   ├── auth.py
-│   ├── client.py
-│   ├── email.py
-│   ├── user.py
-├── providers/                 # Funções auxiliares ou externas
-│   ├── email_provider.py
-│   ├── hash_provider.py
-│   ├── token_provider.py
+├── models/                    # Schemas e validações (Pydantic)
+├── providers/                 # Serviços auxiliares (e-mail, hash, JWT)
 ├── routers/                   # Rotas organizadas por responsabilidade
-│   ├── __init__.py
-│   ├── auth_utils.py
-│   ├── router_auth.py
-│   ├── router_deletes.py
-│   ├── router_emails.py
-│   ├── router_modifications.py
-│   └── router_registers.py
-│
-├── services/                  # Lógica de serviço (ex: banco de dados)
-│   ├── client_delete.py
-│   ├── client_register.py
-│   ├── user_delete.py
-│   ├── user_email_get.py
-│   ├── user_get_hash_ByEmail.py
-│   ├── user_modify_status.py
-│   ├── user_register.py
-├── templates/                 # Templates de e-mail ou HTML (se houver)
-│   ├── confirm_email.py
-├── .gitignore 
-├── README.md 
-└──  server.py                  # Ponto de entrada da aplicação
+├── services/                  # Regras de negócio
+├── templates/                 # Templates HTML para e-mails
+├── .env                       # Variáveis de ambiente
+├── .gitignore
+├── README.md
+└── server.py                  # Ponto de entrada da aplicação
 ```
 
 ---
 
-### 🧩 Endpoints disponíveis
+## 🧩 Endpoints disponíveis
 
-#### 🔐 Autenticação (`/auth`)
+### 🔐 Autenticação (`/auth`)
 
-* `POST /auth/login` — Login de usuário
-* `POST /auth/logout` — Logout (se implementado)
+* `POST /auth/token` — Login de usuário
+* `GET /auth/me` — Dados do usuário autenticado
 
-#### 👤 Registro (`/register`)
+### 👤 Registro (`/register`)
 
+* `POST /register/user` — Cadastrar novo usuário
 * `POST /register/client` — Cadastrar novo cliente
-* `POST /register/admin` — Cadastrar novo administrador (exemplo)
 
-#### ✉️ E-mails (`/email`)
+### ✉️ E-mails (`/email`)
 
-* `POST /email/send-verification` — Enviar código ou link de verificação
+* `POST /email/confirm` — Confirmação de e-mail
 
-#### 🗑️ Deleções (`/delete`)
+### 🗑️ Deleções (`/delete`)
 
+* `DELETE /delete/user` — Deletar usuário autenticado
 * `DELETE /delete/client/{id}` — Deletar cliente por ID
-* `DELETE /delete/admin/{id}` — Deletar administrador por ID
 
-#### ✏️ Modificações (`/modify`)
+### ✏️ Modificações (`/modify`)
 
-* `PATCH /modify/client/{id}` — Atualizar dados do cliente
-* `PUT /modify/status` — Atualizar status com base no e-mail (exemplo)
-* `DELETE /modify/client/{id}` — Deletar cliente com verificação
+* `PATCH /modify/status/{email}` — Ativar conta via e-mail
 
-> ⚠️ Consulte o Swagger para ver todos os endpoints disponíveis (`/docs`).
+> ⚠️ Acesse `/docs` para visualizar todos os endpoints com exemplos interativos.
 
 ---
 
-### ▶️ Como executar localmente
+## ▶️ Como executar localmente
 
-1. **Clone o repositório**
+### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repo.git
-cd seu-repo/backend
+git clone https://github.com/desv-jorge/Management-System.git
+cd Management-System/backend
 ```
 
-2. **Crie e ative um ambiente virtual**
+### 2. Crie e ative um ambiente virtual
 
 ```bash
 python -m venv venv
@@ -110,50 +82,55 @@ source venv/bin/activate     # Linux/macOS
 venv\Scripts\activate        # Windows
 ```
 
-3. **Instale as dependências**
+### 3. Instale as dependências
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. **Configure o `.env`**
-   Crie um arquivo `.env` com as configurações necessárias (exemplo de variáveis comuns):
+### 4. Crie o arquivo `.env`
 
-```
-MONGO_URL=mongodb://localhost:27017
-JWT_SECRET=uma_senha_segura
-TOKEN_EXPIRE_MINUTES=30
+```env
+MONGO_URI = "mongodb+srv://jorge:22916145@database.17vomu2.mongodb.net/?retryWrites=true&w=majority&appName=Database"
+
+SECRET_KEY = "7721d43bbd163a81e3ad6c5f6a734d717137f35e1e544b9ad5e9a1016a85fbed"
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 14400
 ```
 
-5. **Inicie o servidor**
+> 🔒 **Importante:** Certifique-se de que o arquivo `.env` está listado no `.gitignore` para evitar o versionamento de dados sensíveis.
+
+### 5. Inicie o servidor
 
 ```bash
 uvicorn server:app --reload
 ```
 
-6. **Acesse a documentação**
+### 6. Acesse a documentação interativa
 
 * Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)
 * Redoc: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
 ---
 
-### ✅ TODO
+## ✅ TODO
 
-* [ ] Implementar testes unitários com `pytest`
-* [ ] Adicionar autenticação OAuth2
-* [ ] Melhorar tratamento de erros com `HTTPException`
+* [ ] Implementar testes automatizados com `pytest`
+* [ ] Adicionar autenticação OAuth2 (Google, GitHub etc.)
 * [ ] Dockerizar o projeto
+* [ ] Criar sistema de logs
+* [ ] Melhorar tratamento de erros com `HTTPException`
+* [ ] Adicionar sistema de permissões (roles de admin e cliente)
 
 ---
 
-### 👨‍💻 Contribuição
+## 👨‍💻 Contribuição
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou pull request.
 
 ---
 
-### 📝 Licença
+## 📝 Licença
 
-Este projeto está licenciado sob a **MIT License**. Veja o arquivo `LICENSE` para mais detalhes.
+Este projeto está licenciado sob a **MIT License**.
 
