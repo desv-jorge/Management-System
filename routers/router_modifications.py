@@ -5,5 +5,4 @@ router = APIRouter()
 
 @router.patch("/status/{email}")
 async def activate_user(email):
-    print(f"rota| edit_status: {email}")
     return await mofify_status(str(email))
