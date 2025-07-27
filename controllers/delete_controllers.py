@@ -13,7 +13,7 @@ async def user_delete(email: Model_user_one, user: Model_user):
 
     delete_response = await delete_user(email)
 
-    if(delete_response == True):
+    if(delete_response):
         raise HTTPException(status_code=status.HTTP_200_OK, detail="Usuário deletado com sucesso")
 
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Usuário não encontrado")
