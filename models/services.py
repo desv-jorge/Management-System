@@ -1,7 +1,8 @@
 from pydantic import BaseModel
 from typing import Optional
 
-class Model_client(BaseModel):
-    nome: str
-    telefone: Optional[str] = None
+class Model_services(BaseModel):
+    client : str
+    device: str
+    description: str
     email: Optional[str] = None

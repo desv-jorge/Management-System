@@ -2,9 +2,11 @@ from fastapi import HTTPException, status
 
 from models.user import Model_user
 from models.client import Model_client
+from models.services import Model_services
 
 from services.user_register import register_user
 from services.client_register import create_client
+from services.services_register import create_services
 from services.user_email_get import get_email
 
 from providers.hash_provider import gen_hash
@@ -26,3 +28,6 @@ async def processor_register_user(user : Model_user, logged_user ):
 
 async def processor_register_client(client: Model_client, user_id):
     return await create_client(client.nome, client.telefone, client.email, user_id)
+
+async def processor_register_services(services: Model_services, user_id):
+    return await create_services(services.client,services.device ,services.description, services.email, user_id)
