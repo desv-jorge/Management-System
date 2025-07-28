@@ -3,7 +3,7 @@ from datetime import datetime
 
 client = create_client()
 
-async def register_user(nome, acess_level, email ,password):
+def register_user(nome, acess_level, email ,password):
     now = datetime.now()
     try:
         database = client["Database"]

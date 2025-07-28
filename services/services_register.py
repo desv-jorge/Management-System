@@ -3,7 +3,7 @@ from datetime import datetime
 
 client = create_client()
 
-async def create_services(client_req, device , desc, email, user):
+def create_services(client_req, device , desc, email, user):
     now = datetime.now()
     try:
         database = client["Database"]

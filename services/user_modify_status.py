@@ -3,7 +3,7 @@ from datetime import datetime
 
 client = create_client()
 
-async def edit_status(email: str):
+def edit_status(email: str):
     print(f"edit_status: {email}")
 
     try:
@@ -14,7 +14,7 @@ async def edit_status(email: str):
         update_operation = { '$set' : { 'is_active' : True }}
 
         results = collection.update_one(query_filter, update_operation)
-        print(f"\nresults: {results}")
+
 
         client.close()
 

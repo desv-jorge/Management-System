@@ -1,6 +1,6 @@
 from database.connection import create_client
 
-async def delete_user(email):
+def delete_user(email):
     client = create_client()
 
     db = client["Database"]

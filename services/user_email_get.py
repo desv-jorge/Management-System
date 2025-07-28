@@ -1,7 +1,7 @@
 from models.user import Model_user, Model_user_one
 from database.connection import create_client
 
-async def get_email(email: Model_user_one):
+def get_email(email: Model_user_one):
     client = create_client()
 
     db = client["Database"]
