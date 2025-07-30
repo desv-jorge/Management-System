@@ -3,14 +3,14 @@ from datetime import datetime
 
 client = create_client()
 
-def register_user(nome, acess_level, email ,password):
+def register_user(name, acess_level, email ,password):
     now = datetime.now()
     try:
         database = client["Database"]
         collection = database["users"]
 
         document = { 
-        "nome" : nome,
+        "name" : name,
         "acess_level" : acess_level,
         "email": email,
         "password": password,

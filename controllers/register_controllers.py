@@ -24,10 +24,10 @@ async def processor_register_user(user : Model_user, logged_user ):
     password = str(user.password)
     password_hashed = gen_hash(password)
 
-    return await register_user(user.nome, user.acess_level, user.email, password_hashed)
+    return await register_user(user.name, user.acess_level, user.email, password_hashed)
 
 async def processor_register_client(client: Model_client, user_id):
-    return await create_client(client.nome, client.telefone, client.email, user_id)
+    return await create_client(client.name, client.phone, client.email, user_id)
 
 async def processor_register_services(services: Model_services, user_id):
     return await create_services(services.client,services.device ,services.description, services.email, user_id)

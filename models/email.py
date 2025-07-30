@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
 class Model_email_confirm(BaseModel):
-    nome: str
+    name: str
     email: str
-    codigo: str
+    code: str

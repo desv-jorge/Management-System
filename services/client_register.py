@@ -3,15 +3,15 @@ from datetime import datetime
 
 client = create_client()
 
-def create_client(nome, telefone, email, user_id):
+def create_client(name, phone, email, user_id):
     now = datetime.now()
     try:
         database = client["Database"]
         collection = database["clients"]
 
         document = { 
-        "nome" : nome,
-        "telefone": telefone,
+        "name" : name,
+        "phone": phone,
         "email": email,
         "created_at": now.strftime("%d-%m-%Y %H:%M:%S"),
         "created_by": user_id
