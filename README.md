@@ -109,7 +109,6 @@ uvicorn server:app --reload
 ### 6. Acesse a documentação interativa
 
 * Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)
-* Redoc: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
 ---
 
