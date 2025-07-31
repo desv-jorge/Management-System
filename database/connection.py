@@ -1,11 +1,9 @@
-# db/connection.py
-from pymongo import MongoClient
-from dotenv import load_dotenv
+from mongoengine import connect
 import os
+from dotenv import load_dotenv
 
-load_dotenv()  # Carrega variáveis do .env
+load_dotenv()
 
-def create_client():
-    uri = os.getenv("MONGO_URI")
-    client = MongoClient(uri)
-    return client
+def db_init():
+    connect(db="Database" ,host=os.getenv("MONGO_URI"))
+
