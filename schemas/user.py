@@ -9,7 +9,7 @@ class User(Document):
     password = StringField(required=True)
     created_at = StringField(default=lambda: datetime.now().strftime("%d-%m-%Y %H:%M:%S"))
     status = StringField(default="active")
-    is_active = BooleanField(default=True)
+    is_active = BooleanField(default=False)
 
     meta = {
         'collection': 'users'
