@@ -11,5 +11,5 @@ class Model_user(BaseModel):
     email: str
     password: str
 
-class Model_user_one(BaseModel):
+class email(BaseModel):
     email: str
