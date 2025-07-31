@@ -3,7 +3,7 @@ from fastapi import Depends, HTTPException, status
 from jose import JWTError
 
 from providers.token_provider import verify_acess_token
-from services.user_get_ByEmail import get_user
+from services.user_services import get_user_email_by_email
 
 oauth2_schema = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -18,9 +18,9 @@ async def get_user_loggedIn(token: str = Depends(oauth2_schema)):
     if not email:
         raise error_excepetion
     
-    user = await get_user(email)
+    user = await get_user_email_by_email(email)
 
-    if user == False:
+    if user == None:
         raise error_excepetion
 
     return user
