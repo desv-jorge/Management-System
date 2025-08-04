@@ -6,13 +6,13 @@ API desenvolvida com [FastAPI](https://fastapi.tiangolo.com/) para gerenciamento
 
 ## 🚀 Tecnologias utilizadas
 
-* **Python 3.11+**
-* **FastAPI**
-* **MongoDB** (via PyMongo)
-* **Pydantic**
-* **Uvicorn** (servidor ASGI)
-* **JWT** (para autenticação)
-* **CORS Middleware**
+* **🐍 Python 3.11+**
+* **⚡ FastAPI** — Web framework moderno e performático
+* **🍃 MongoDB** — Banco de dados NoSQL (via MongoEngine)
+* **🔐 JWT** — Autenticação com JSON Web Tokens
+* **📦 Pydantic** — Validação e tipagem de dados
+* **🔄 CORS Middleware**
+* **🔧 Uvicorn** — Servidor ASGI leve e rápido
 
 ---
 
@@ -26,6 +26,7 @@ backend/
 ├── models/                    # Schemas e validações (Pydantic)
 ├── providers/                 # Serviços auxiliares (e-mail, hash, JWT)
 ├── routers/                   # Rotas organizadas por responsabilidade
+├── schemas/                   # Modelos de banco de dados com o mongoEngine
 ├── services/                  # Regras de negócio
 ├── templates/                 # Templates HTML para e-mails
 ├── .env                       # Variáveis de ambiente
