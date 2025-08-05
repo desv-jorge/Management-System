@@ -5,6 +5,7 @@ from models.user import Model_user, email
 from .auth_utils import get_user_loggedIn
 from controllers.delete_controllers import user_delete
 from controllers.delete_controllers import client_delete
+from controllers.delete_controllers import services_delete
 
 
 router = APIRouter()
@@ -16,3 +17,7 @@ async def delete_user(user: Model_user = Depends(get_user_loggedIn), email_body:
 @router.delete("/client/{id}")
 async def delete_client(id: str = Path(), user: Model_user = Depends(get_user_loggedIn)):
     return await client_delete(id)
+
+@router.delete("/service/{id}")
+async def delete_service(id: str = Path(), user: Model_user = Depends(get_user_loggedIn)):
+    return await services_delete(id)

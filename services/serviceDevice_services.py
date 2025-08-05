@@ -1,6 +1,6 @@
 from schemas.services import Service
 from schemas.user import User
-from mongoengine.errors import ValidationError
+from mongoengine.errors import ValidationError, DoesNotExist
 from bson import ObjectId
 
 def create_service(service_body, user_id: str):
@@ -26,3 +26,15 @@ def create_service(service_body, user_id: str):
     
     except Exception as e:
         raise Exception(f"Erro ao criar serviço: {e}")
+
+def delete_services(id: str):
+    try:
+        service = Service.objects.get(id=id)
+        service.delete()
+        return {"response": True}
+
+    except (DoesNotExist, ValidationError):
+        return {"response": False}
+
+    except Exception as e:
+        raise Exception(f"Erro ao deletar serviço: {e}")
