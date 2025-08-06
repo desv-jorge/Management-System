@@ -1,4 +1,5 @@
 from schemas.services import Service
+from schemas.client import Client
 
 def services_get():
     
@@ -17,3 +18,20 @@ def services_get():
         })
 
     return services_list
+
+def clients_get():
+
+    clients = Client.objects()
+    clients_list = []
+
+    for client in clients:
+        clients_list.append({
+            "id": str(client.id),
+            "name": client.name,
+            "phone": client.phone,
+            "email": client.email,
+            "created_by": str(client.created_by),
+            "created_at": client.created_at  # já é string
+        })
+
+    return clients_list
