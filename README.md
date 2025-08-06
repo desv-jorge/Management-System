@@ -1,72 +1,42 @@
-# 📦 Backend - Management System (Loja de Celulares)
 
-API desenvolvida com [FastAPI](https://fastapi.tiangolo.com/) para gerenciamento de usuários, autenticação, envio de e-mails e operações administrativas relacionadas a uma loja de celulares.
+# 📱 Management System
 
----
-
-## 🚀 Tecnologias utilizadas
-
-* **🐍 Python 3.11+**
-* **⚡ FastAPI** — Web framework moderno e performático
-* **🍃 MongoDB** — Banco de dados NoSQL (via MongoEngine)
-* **🔐 JWT** — Autenticação com JSON Web Tokens
-* **📦 Pydantic** — Validação e tipagem de dados
-* **🔄 CORS Middleware**
-* **🔧 Uvicorn** — Servidor ASGI leve e rápido
+Sistema de gerenciamento para uma loja de celulares, acessórios e serviços de assistência técnica. A solução visa facilitar o controle de clientes, serviços prestados e usuários da loja, oferecendo uma API estruturada e segura para administradores e funcionários.
 
 ---
 
-## 📁 Estrutura de Pastas
+## 🚀 Tecnologias Utilizadas
+
+- **Python 3**
+- **FastAPI**
+- **MongoEngine / PyMongo**
+- **Uvicorn**
+- **JWT Authentication**
+- **dotenv** para gerenciamento de variáveis sensíveis
+
+---
+
+## 🧱 Estrutura do Projeto
 
 ```
 backend/
-│
 ├── controllers/               # Funções de controle de negócio
 ├── database/                  # Conexão com MongoDB
 ├── models/                    # Schemas e validações (Pydantic)
 ├── providers/                 # Serviços auxiliares (e-mail, hash, JWT)
 ├── routers/                   # Rotas organizadas por responsabilidade
-├── schemas/                   # Modelos de banco de dados com o mongoEngine
+├── schemas/                   # Modelos de banco com MongoEngine
 ├── services/                  # Regras de negócio
-├── templates/                 # Templates HTML para e-mails
+├── templates/                 # Templates HTML para envio de e-mails
 ├── .env                       # Variáveis de ambiente
-├── .gitignore
-├── README.md
-└── server.py                  # Ponto de entrada da aplicação
+├── requirements.txt           # Dependências do projeto
+├── server.py                  # Ponto de entrada da aplicação
+└── README.md
 ```
 
 ---
 
-## 🧩 Endpoints disponíveis
-
-### 🔐 Autenticação (`/auth`)
-
-* `POST /auth/token` — Login de usuário
-* `GET /auth/me` — Dados do usuário autenticado
-
-### 👤 Registro (`/register`)
-
-* `POST /register/user` — Cadastrar novo usuário
-* `POST /register/client` — Cadastrar novo cliente
-
-### ✉️ E-mails (`/email`)
-
-* `POST /email/confirm` — Confirmação de e-mail
-
-### 🗑️ Deleções (`/delete`)
-
-* `DELETE /delete/user` — Deletar usuário autenticado
-* `DELETE /delete/client/{id}` — Deletar cliente por ID
-
-### ✏️ Modificações (`/modify`)
-
-* `PATCH /modify/status/{email}` — Ativar conta via e-mail
-
-> ⚠️ Acesse `/docs` para visualizar todos os endpoints com exemplos interativos.
-
----
-
-## ▶️ Como executar localmente
+## ⚙️ Configuração e Execução
 
 ### 1. Clone o repositório
 
@@ -75,7 +45,7 @@ git clone https://github.com/desv-jorge/Management-System.git
 cd Management-System/backend
 ```
 
-### 2. Crie e ative um ambiente virtual
+### 2. Crie e ative o ambiente virtual
 
 ```bash
 python -m venv venv
@@ -89,17 +59,19 @@ venv\Scripts\activate        # Windows
 pip install -r requirements.txt
 ```
 
-### 4. Crie o arquivo `.env`
+### 4. Configure as variáveis de ambiente
+
+Crie um arquivo `.env` na raiz do projeto:
 
 ```env
-MONGO_URI = "string de conexão"
+MONGO_URI = "sua_string_de_conexao_mongodb"
 
-SECRET_KEY = "hash gerado por um bash"
+SECRET_KEY = "chave_gerada_pelo_bash"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 14400
 ```
 
-> 🔒 **Importante:** Certifique-se de que o arquivo `.env` está listado no `.gitignore` para evitar o versionamento de dados sensíveis.
+> 🔐 **Importante:** Mantenha seu `.env` fora do versionamento (`.gitignore` já cobre isso).
 
 ### 5. Inicie o servidor
 
@@ -109,28 +81,65 @@ uvicorn server:app --reload
 
 ### 6. Acesse a documentação interativa
 
-* Swagger UI: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **Swagger UI:** [http://localhost:8000/docs](http://localhost:8000/docs)
 
 ---
 
-## ✅ TODO
+## 📡 Endpoints disponíveis
 
-* [ ] Implementar testes automatizados com `pytest`
-* [ ] Adicionar autenticação OAuth2 (Google, GitHub etc.)
-* [ ] Dockerizar o projeto
-* [ ] Criar sistema de logs
-* [ ] Melhorar tratamento de erros com `HTTPException`
-* [ ] Adicionar sistema de permissões (roles de admin e cliente)
+> 🔒 Todos os endpoints protegidos requerem autenticação JWT
+
+### 🔐 Autenticação
+- `POST /auth/token` – Login
+- `GET /auth/me` – Obter dados do usuário autenticado
+
+### 👤 Usuário
+- `POST /register/user` – Criar novo usuário
+- `DELETE /delete/user` – Deletar usuário autenticado
+- `PATCH /modify/status/{email}` – Ativar conta
+- `POST /email/confirm` – Enviar confirmação de conta por email
+
+### 👥 Clientes
+- `POST /register/client` – Registrar cliente
+- `GET /get/clients` – Listar clientes
+- `DELETE /delete/client/{id}` – Deletar cliente
+
+### 🛠️ Serviços
+- `POST /register/services` – Registrar serviço
+- `GET /get/services` – Listar serviços
+- `DELETE /delete/service/{id}` – Deletar serviço
 
 ---
 
-## 👨‍💻 Contribuição
+## 🧪 Exemplo de uso
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou pull request.
+```bash
+curl -X POST http://localhost:8000/auth/token   -H "Content-Type: application/x-www-form-urlencoded"   -d "username=usuario@email.com&password=suasenha"
+```
 
 ---
 
-## 📝 Licença
+## 🤝 Contribuindo
 
-Este projeto está licenciado sob a **MIT License**.
+Este projeto segue o padrão de commits atômicos:
 
+```bash
+type(scope): descrição clara da mudança
+```
+
+Exemplos:
+- `feat(auth): add JWT token validation middleware`
+- `fix(client): handle missing email on client registration`
+- `refactor(routers): centralize router registration in __init__.py`
+
+---
+
+## 📜 Licença
+
+Projeto pessoal desenvolvido para uso em uma loja real. Sem licença pública até o momento.
+
+---
+
+## ✉️ Contato
+
+Caso tenha dúvidas ou sugestões, sinta-se à vontade para abrir uma issue ou entrar em contato via [LinkedIn](www.linkedin.com/in/jorge-nathanael) ou [email](nathanael.jorge@aluno.uepb.edu.br).
