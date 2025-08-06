@@ -5,6 +5,12 @@ from templates.confirm_email import create_template
 
 from models.email import Model_email_confirm
 
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
+APP_KEY = os.getenv("APP_KEY")
+
 def confirm_email(confirm_email_body: Model_email_confirm):
     conteudo_html = create_template(confirm_email_body.nome,confirm_email_body.codigo)
 
@@ -20,7 +26,7 @@ def confirm_email(confirm_email_body: Model_email_confirm):
     msg.add_alternative(conteudo_html, subtype="html")
 
     with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
-        smtp.login("jorgenathanael53@gmail.com", "tjimejazwiumrhwd")
+        smtp.login("jorgenathanael53@gmail.com", APP_KEY)
         smtp.send_message(msg)
 
     return {"message" : "Código de confirmação enviado"}
