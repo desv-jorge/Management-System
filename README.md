@@ -69,6 +69,8 @@ MONGO_URI = "sua_string_de_conexao_mongodb"
 SECRET_KEY = "chave_gerada_pelo_bash"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 14400
+
+APP_KEY = "sua_chave_app_gerada_pelo_google"
 ```
 
 > 🔐 **Importante:** Mantenha seu `.env` fora do versionamento (`.gitignore` já cobre isso).
