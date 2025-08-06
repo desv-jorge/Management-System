@@ -38,3 +38,6 @@ def delete_services(id: str):
 
     except Exception as e:
         raise Exception(f"Erro ao deletar serviço: {e}")
+    
+def services_get():
+    pass
