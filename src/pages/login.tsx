@@ -1,6 +1,5 @@
 import logo from "../assets/logo.jpg";
 import background from "../assets/celular.jpg";
-import "../style.css";
 
 function Login() {
   return (
@@ -40,7 +39,7 @@ function Login() {
 
           <button
             type="submit"
-            className="px-4 py-3 rounded bg-white text-gray-800 font-bold hover:bg-gray-300 transition-colors"
+            className="px-4 py-3 rounded bg-white text-gray-800 font-bold hover:bg-gray-300 transition-colors cursor-pointer"
           >
             ENTRAR
           </button>
