@@ -1,4 +1,5 @@
 import { FaEdit, FaTrashAlt, FaPlus } from "react-icons/fa";
+import Cookies from "js-cookie";
 
 import Header from "../components/header";
 
@@ -41,6 +42,15 @@ const services = [
 ];
 
 export default function Dashboard() {
+
+  // const token = Cookies.get("jwt_token");
+
+  // const response = await fetch("http://localhost:8000/protected", {
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  // });
+
   return (
     <div className="min-h-screen bg-gray-200 font-sans">
       {/* Navbar */}
