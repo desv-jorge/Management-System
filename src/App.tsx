@@ -1,9 +1,10 @@
 import Login from './pages/login'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Dashboard from "./pages/home.tsx";
-import PrivateRoute from "./routes/privateRoute.tsx";
+import Home from "./pages/home.tsx";
+import PrivateRoute from "./routes/PrivateRoute.tsx";
 import RedirectRoute from "./routes/RedirectRoute.tsx";
+import ServiceRegister from './pages/Services/register.tsx';
 
 function App() {
   return (
@@ -15,7 +16,15 @@ function App() {
           path="/dashboard"
           element={
             <PrivateRoute>
-              <Dashboard />
+              <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/service-register"
+          element={
+            <PrivateRoute>
+              <ServiceRegister />
             </PrivateRoute>
           }
         />
